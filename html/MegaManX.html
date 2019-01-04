@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mega Man X Password Generator</title>
+</head>
+
+<body>
+
+  <h1>Mega Man X Password Generator</h1>
+  <table>
+    <tr>
+      <th>Stage</th>
+      <th>Boss</th>
+      <th>Heart</th>
+      <th>Tank</th>
+      <th>Capsule</th>
+    </tr>
+    <tr>
+      <td>(All)</td>
+      <td><input type="checkbox" id="b_all" onclick="b_all()"></td>
+      <td><input type="checkbox" id="h_all" onclick="h_all()"></td>
+      <td><input type="checkbox" id="e_all" onclick="e_all()"></td>
+      <td><input type="checkbox" id="c_all" onclick="c_all()"></td>
+    </tr>
+    <tr>
+      <td>Chill Penguin</td>
+      <td><input type="checkbox" id="b_cp" onclick="update()"></td>
+      <td><input type="checkbox" id="h_cp" onclick="update()"></td>
+      <td></td>
+      <td><input type="checkbox" id="c_cp" onclick="update()">Dash</td>
+    </tr>
+    <tr>
+      <td>Spark Mandrill</td>
+      <td><input type="checkbox" id="b_sm" onclick="update()"></td>
+      <td><input type="checkbox" id="h_sm" onclick="update()"></td>
+      <td><input type="checkbox" id="e_sm" onclick="update()"></td>
+    </tr>
+    <tr>
+      <td>Armored Armadillo</td>
+      <td><input type="checkbox" id="b_aa" onclick="update()"></td>
+      <td><input type="checkbox" id="h_aa" onclick="update()"></td>
+      <td><input type="checkbox" id="e_aa" onclick="update()"></td>
+      <td><input type="checkbox" id="c_aa" onclick="update()">Hadouken*</td>
+    </tr>
+    <tr>
+      <td>Launch Octopus</td>
+      <td><input type="checkbox" id="b_lo" onclick="update()"></td>
+      <td><input type="checkbox" id="h_lo" onclick="update()"></td>
+    </tr>
+    <tr>
+      <td>Boomer Kuwanger</td>
+      <td><input type="checkbox" id="b_bk" onclick="update()"></td>
+      <td><input type="checkbox" id="h_bk" onclick="update()"></td>
+    </tr>
+    <tr>
+      <td>Sting Chameleon</td>
+      <td><input type="checkbox" id="b_sc" onclick="update()"></td>
+      <td><input type="checkbox" id="h_sc" onclick="update()"></td>
+      <td></td>
+      <td><input type="checkbox" id="c_sc" onclick="update()">Armor</td>
+    </tr>
+    <tr>
+      <td>Storm Eagle</td>
+      <td><input type="checkbox" id="b_se" onclick="update()"></td>
+      <td><input type="checkbox" id="h_se" onclick="update()"></td>
+      <td><input type="checkbox" id="e_se" onclick="update()"></td>
+      <td><input type="checkbox" id="c_se" onclick="update()">Helmet</td>
+    </tr>
+    <tr>
+      <td>Flame Mammoth</td>
+      <td><input type="checkbox" id="b_fm" onclick="update()"></td>
+      <td><input type="checkbox" id="h_fm" onclick="update()"></td>
+      <td><input type="checkbox" id="e_fm" onclick="update()"></td>
+      <td><input type="checkbox" id="c_fm" onclick="update()">Buster</td>
+    </tr>
+  </table>
+  <ul>
+    <li><pre id="pw1">6714-8667-2648</pre></li>
+    <li><pre id="pw2">5382-8666-4656</pre></li>
+    <li><pre id="pw3">6718-7137-5384</pre></li>
+    <li><pre id="pw4">5385-7136-6321</pre></li>
+    <li><pre id="pw5">1764-1488-7748</pre></li>
+    <li><pre id="pw6">4322-1482-8756</pre></li>
+    <li><pre id="pw7">1768-5858-3884</pre></li>
+    <li><pre id="pw8">4325-5852-1821</pre></li>
+  </ul>
+  <p>*Note: For Hadouken codes, hold L+R+X+Down while pressing Start.</p>
+
+  <script>
+    function digit(x0, x1, x2) {
+      return (x0 ? 4 : 0) + (x1 ? 2 : 0) + (x2 ? 1 : 0);
+    }
+
+    function check(name) {
+      return document.getElementById(name).checked;
+    }
+
+    function update() {
+      var h_cp = check("h_cp");
+      var h_sm = check("h_sm");
+      var h_aa = check("h_aa");
+      var h_lo = check("h_lo");
+      var h_bk = check("h_bk");
+      var h_sc = check("h_sc");
+      var h_se = check("h_se");
+      var h_fm = check("h_fm");
+      var b_cp = check("b_cp");
+      var b_sm = check("b_sm");
+      var b_aa = check("b_aa");
+      var b_lo = check("b_lo");
+      var b_bk = check("b_bk");
+      var b_sc = check("b_sc");
+      var b_se = check("b_se");
+      var b_fm = check("b_fm");
+      var e_sm = check("e_sm");
+      var e_aa = check("e_aa");
+      var e_se = check("e_se");
+      var e_fm = check("e_fm");
+      var c_cp = check("c_cp");
+      var c_sc = check("c_sc");
+      var c_se = check("c_se");
+      var c_fm = check("c_fm");
+      var c_aa = check("c_aa");
+
+      // NOTE: != is xor on booleans
+      var sum1 = b_cp != b_fm != h_lo != h_sc != e_se != e_aa != e_sm != c_sc != c_se != c_fm;
+      var sum2 = h_cp != h_sm != h_aa != h_lo != h_bk != h_sc != h_se != h_fm;
+      var sum3 = b_cp != b_aa != b_lo != b_bk != b_se != b_fm != h_aa != h_bk != c_fm != e_aa;
+      var sum4 = c_cp != c_sc != c_se != c_fm != e_se != e_aa != e_sm != e_fm;
+      var sum5 = b_lo != b_se != h_cp != h_fm != c_se != e_se != c_aa;
+      var sum6 = b_aa != b_bk != h_cp != h_aa != h_lo != h_bk != h_sc != h_fm != c_sc != e_sm;
+      var sum7 = b_cp != b_sm != b_aa != b_lo != b_bk != b_sc != b_se != b_fm;
+
+      var code = [];
+      code[0]  = digit(h_cp, e_aa, sum1);
+      code[1]  = digit(b_fm, c_se, sum2);
+      code[2]  = digit(e_fm, h_fm, false);
+      code[3]  = digit(b_se, h_se, false);
+      code[4]  = digit(b_lo, c_sc, sum3);
+      code[5]  = digit(h_bk, b_bk, sum4);
+      code[6]  = digit(c_fm, b_aa, sum5);
+      code[7]  = digit(h_sc, b_sm, false);
+      code[8]  = digit(c_cp, h_aa, sum6);
+      code[9]  = digit(b_sc, e_se, false);
+      code[10] = digit(e_sm, h_lo, sum7);
+      code[11] = digit(b_cp, h_sm, c_aa);
+
+      var rnd_0 = [0,0,0,0,0,0,0,0,0,0,0,0];
+      var rnd_a = [2,0,1,0,1,4,4,2,2,4,0,0];
+      var rnd_b = [0,0,0,2,2,2,2,0,1,1,4,2];
+      var rnd_c = [1,4,4,1,0,0,0,4,4,0,2,4];
+
+      // 6714-8667-2648 is an initial password
+      var table =
+        [["6","5","1","4","8","3","7","2"],
+         ["7","8","6","5","3","2","4","1"],
+         ["1","6","5","7","8","2","3","4"],
+         ["4","2","8","5","7","6","1","3"],
+         ["8","1","7","5","6","4","3","2"],
+         ["6","5","1","3","4","7","8","2"],
+         ["6","2","3","7","8","1","5","4"],
+         ["7","5","8","4","6","3","2","1"],
+         ["2","5","7","3","4","6","8","1"],
+         ["6","3","4","1","7","8","5","2"],
+         ["4","1","5","3","8","7","2","6"],
+         ["8","2","4","7","6","5","1","3"]];
+
+      function format(a, b, c) {
+        var ra = a ? rnd_a : rnd_0;
+        var rb = b ? rnd_b : rnd_0;
+        var rc = c ? rnd_c : rnd_0;
+
+        text = "";
+        for (i = 0; i < 12; i++) {
+          text += table[i][code[i] ^ ra[i] ^ rb[i] ^ rc[i]];
+          if (i == 3 || i == 7) {
+            text += "-";
+          }
+        }
+        return text;
+      }
+      document.getElementById("pw1").innerHTML = format(false, false, false);
+      document.getElementById("pw2").innerHTML = format(false, false, true);
+      document.getElementById("pw3").innerHTML = format(false, true, false);
+      document.getElementById("pw4").innerHTML = format(false, true, true);
+      document.getElementById("pw5").innerHTML = format(true, false, false);
+      document.getElementById("pw6").innerHTML = format(true, false, true);
+      document.getElementById("pw7").innerHTML = format(true, true, false);
+      document.getElementById("pw8").innerHTML = format(true, true, true);
+    }
+
+    function b_all() {
+      var x = check("b_all");
+      document.getElementById("b_cp").checked = x;
+      document.getElementById("b_sm").checked = x;
+      document.getElementById("b_aa").checked = x;
+      document.getElementById("b_lo").checked = x;
+      document.getElementById("b_bk").checked = x;
+      document.getElementById("b_sc").checked = x;
+      document.getElementById("b_se").checked = x;
+      document.getElementById("b_fm").checked = x;
+      update();
+    }
+
+    function h_all() {
+      var x = check("h_all");
+      document.getElementById("h_cp").checked = x;
+      document.getElementById("h_sm").checked = x;
+      document.getElementById("h_aa").checked = x;
+      document.getElementById("h_lo").checked = x;
+      document.getElementById("h_bk").checked = x;
+      document.getElementById("h_sc").checked = x;
+      document.getElementById("h_se").checked = x;
+      document.getElementById("h_fm").checked = x;
+      update();
+    }
+
+    function e_all() {
+      var x = check("e_all");
+      document.getElementById("e_sm").checked = x;
+      document.getElementById("e_aa").checked = x;
+      document.getElementById("e_se").checked = x;
+      document.getElementById("e_fm").checked = x;
+      update();
+    }
+
+    function c_all() {
+      var x = check("c_all");
+      document.getElementById("c_cp").checked = x;
+      document.getElementById("c_sc").checked = x;
+      document.getElementById("c_se").checked = x;
+      document.getElementById("c_fm").checked = x;
+      document.getElementById("c_aa").checked = x;
+      update();
+    }
+
+    update();
+  </script>
+</body>
+
+</html>
